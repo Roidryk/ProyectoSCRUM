@@ -1,0 +1,31 @@
+# Base de datos 
+
+CREATE DATABASE bdTrabajadores;
+USE bdTrabajadores;
+
+CREATE TABLE trabajadores (
+    DNI VARCHAR(20) PRIMARY KEY,
+    Nombre VARCHAR(50),
+    Apellidos VARCHAR(50),
+    Sueldo DOUBLE,
+    Fecha VARCHAR(20),
+    Matricula VARCHAR(20)
+);
+
+INSERT INTO trabajadores (DNI, Nombre, Apellidos, Sueldo, Fecha, Matricula)
+VALUES
+    ('12345678A', 'Juan', 'Pérez', 3000.50, '01/01/2023', 'ABC-123'),
+    ('98765432B', 'María', 'López', 2800.75, '01/02/2023', 'DEF-456'),
+    ('56789012C', 'Pedro', 'García', 3200.00, '01/03/2023', 'GHI-789'),
+    ('34567890D', 'Ana', 'Martínez', 3100.25, '01/04/2023', 'JKL-012'),
+    ('12343210E', 'Carlos', 'Rodríguez', 2900.50, '01/05/2023', 'MNO-345'),
+    ('45678901F', 'Laura', 'Fernández', 3000.75, '01/06/2023', 'PQR-678'),
+    ('23456789G', 'Miguel', 'Sánchez', 3100.00, '01/07/2023', 'STU-901'),
+    ('89012345H', 'Elena', 'Jiménez', 2800.25, '01/08/2023', 'VWX-234'),
+    ('67890123I', 'José', 'Ruiz', 3200.50, '01/09/2023', 'YZA-567'),
+    ('45678901J', 'Sara', 'Gómez', 3000.75, '01/10/2023', 'BCD-890'),
+    ('23456789K', 'Francisco', 'Hernández', 2900.00, '01/11/2023', 'EFG-123'),
+    ('89012345L', 'Isabel', 'Díaz', 3100.25, '01/12/2023', 'HIJ-456'),
+    ('67890123M', 'David', 'Álvarez', 3200.50, '01/01/2024', 'KLM-789'),
+    ('45678901N', 'Carmen', 'Moreno', 3000.75, '01/02/2024', 'NOP-012'),
+    ('23456789O', 'Antonio', 'Ortega', 2900.00, '01/03/2024', 'QRS-345');
