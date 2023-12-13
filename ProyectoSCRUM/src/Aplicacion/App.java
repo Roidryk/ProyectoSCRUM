@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Aplicacion;
+import Vistas.InterfazPrincipal;
 
 /**
  *
@@ -11,6 +12,9 @@ package Aplicacion;
 public class App {
     
     public static void main(String[] args) {
-        
+
+        InterfazPrincipal vista = new InterfazPrincipal();
+        vista.setVisible(true);
+
     }
 }
