@@ -21,7 +21,7 @@ public class ConexionBD {
             
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String url = "jdbc:mysql://localhost/dbTrabajadores";
+            String url = "jdbc:mysql://localhost/bdTrabajadores";
 
             conexion = DriverManager.getConnection(url, "root", "");
                 
