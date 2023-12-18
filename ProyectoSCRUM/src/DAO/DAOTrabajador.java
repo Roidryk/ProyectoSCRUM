@@ -23,7 +23,7 @@ public class DAOTrabajador {
     Connection conexion = new ConexionBD().getConexion();
     
     try {
-			String sql = "INSERT INTO trabajadores VALUES(?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO trabajadores VALUES(?,?,?,?,?,?)";
 			//Uso una plataforma "Preparada"
 			PreparedStatement plataforma = conexion.prepareStatement(sql);
 			//rellenar las interrogaciones
@@ -31,10 +31,9 @@ public class DAOTrabajador {
                         plataforma.setString(2, trabajador.getNombre());
                         plataforma.setString(3, trabajador.getApellidos());
                         plataforma.setDouble(4, trabajador.getSueldo()); 
-                        plataforma.setInt(5, trabajador.getFechaDia()); 
-                        plataforma.setInt(6, trabajador.getFechaMes()); 
-                        plataforma.setInt(7, trabajador.getFechaAno()); 
-                        plataforma.setString(8, trabajador.getMatricula());
+                        String fecha = trabajador.getFechaDia()+"/"+trabajador.getFechaMes()+"/"+trabajador.getFechaAno();
+                        plataforma.setString(5, fecha);
+                        plataforma.setString(6, trabajador.getMatricula());
 			plataforma.executeUpdate();
 
 			//cerrar la conexi�n
@@ -74,11 +73,10 @@ public class DAOTrabajador {
                         plataforma.setString(1, trabajador.getNombre());
                         plataforma.setString(2, trabajador.getApellidos());
                         plataforma.setDouble(3, trabajador.getSueldo()); 
-                        plataforma.setInt(4, trabajador.getFechaDia()); 
-                        plataforma.setInt(5, trabajador.getFechaMes()); 
-                        plataforma.setInt(6, trabajador.getFechaAno()); 
-                        plataforma.setString(7, trabajador.getMatricula());
-                        plataforma.setString(8, trabajador.getDNI());
+                        String fecha = trabajador.getFechaDia()+"/"+trabajador.getFechaMes()+"/"+trabajador.getFechaAno();
+                        plataforma.setString(4, fecha);
+                        plataforma.setString(5, trabajador.getMatricula());
+                        plataforma.setString(6, trabajador.getDNI());
 			plataforma.executeUpdate();
 
 			//cerrar la conexi�n
