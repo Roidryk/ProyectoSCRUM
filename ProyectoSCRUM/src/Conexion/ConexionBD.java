@@ -18,14 +18,16 @@ public class ConexionBD {
     
     public ConexionBD() {
         try {
-            
+            // cargar el driver  JDBC
             Class.forName("com.mysql.cj.jdbc.Driver");
-
+            
+            // preparar la conexion
             String url = "jdbc:mysql://localhost/bdTrabajadores";
-
+            
+            // conectar la BD con la url, user y passwd  
             conexion = DriverManager.getConnection(url, "root", "");
                 
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) { // Manejar errores
             System.out.println("Error en la carga del Driver");
         } catch (SQLException e) {
             System.out.println("Error conectando a la BBDD");
