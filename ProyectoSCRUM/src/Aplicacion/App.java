@@ -12,8 +12,10 @@ import Vistas.InterfazPrincipal;
 public class App {
     
     public static void main(String[] args) {
-
+        // crear objeto sobre vista
         InterfazPrincipal vista = new InterfazPrincipal();
+        
+        // llamar al metodo para iniciar program
         vista.setVisible(true);
 
     }
