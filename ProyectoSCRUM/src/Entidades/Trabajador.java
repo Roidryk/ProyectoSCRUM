@@ -36,6 +36,7 @@ public class Trabajador {
         this.fechaAno = fechaAno;
         this.matricula = matricula;
     }
+    
     // constructor vacio
     public Trabajador() {
     }
