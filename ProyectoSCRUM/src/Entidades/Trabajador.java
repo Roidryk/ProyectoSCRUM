@@ -9,6 +9,8 @@ package Entidades;
  * @author Administrador
  */
 public class Trabajador {
+
+    // creacion de variables del programa
     private String DNI;
     private String nombre;
     private String apellidos;
@@ -18,12 +20,12 @@ public class Trabajador {
     private int fechaAno;
     private String matricula;
 
-    /* !!!!!!!!!!!!!!!!
+    /*  !!!!!!!!!!!!!!!!
         todo minuscula menos DNI y fechaDia fechaMes fechaAno
     */ 
     
     
-    
+    // constructor completo
     public Trabajador(String DNI, String nombre, String apellidos, double sueldo, int fechaDia, int fechaMes, int fechaAno, String matricula) {
         this.DNI = DNI;
         this.nombre = nombre;
@@ -34,10 +36,12 @@ public class Trabajador {
         this.fechaAno = fechaAno;
         this.matricula = matricula;
     }
-    
+    // constructor vacio
     public Trabajador() {
     }
-    
+
+
+    // getters y setters
     public String getDNI() {
         return DNI;
     }
@@ -102,6 +106,7 @@ public class Trabajador {
         this.matricula = matricula;
     }
 
+    // añadimos toString en caso de uso
     @Override
     public String toString() {
         return "Trabajador{" + "DNI=" + DNI + ", nombre=" + nombre + ", apellidos=" + apellidos + ", sueldo=" + sueldo + ", fechaDia=" + fechaDia + ", fechaMes=" + fechaMes + ", fechaAno=" + fechaAno + ", matricula=" + matricula + '}';
