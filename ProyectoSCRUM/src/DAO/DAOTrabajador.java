@@ -66,7 +66,7 @@ public class DAOTrabajador {
 		 Connection conexion = new ConexionBD().getConexion();
 
 		try {
-			String sql = "Update trabajadores set nombre = ?, apellidos = ?, sueldo = ?, fechaDia = ?, fechaMes = ?, fechaAno = ? where dni = ?";
+			String sql = "UPDATE trabajadores SET nombre = ?, apellidos = ?, sueldo = ?, fecha = ?, matricula = ? WHERE dni = ?";
 			//Uso una plataforma "Preparada"
 			PreparedStatement plataforma = conexion.prepareStatement(sql);
 			//rellenar las interrogaciones
