@@ -36,7 +36,11 @@ public class Trabajador {
         this.fechaAno = fechaAno;
         this.matricula = matricula;
     }
-    
+
+    public Trabajador(String DNI) {
+        this.DNI = DNI;
+    }
+
     // constructor vacio
     public Trabajador() {
     }
