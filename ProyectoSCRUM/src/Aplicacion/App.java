@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Aplicacion;
-import Vistas.InterfazPrincipal;
+import Vistas.Vistas.InterfazPrincipal_1;
 
 /**
  *
@@ -13,7 +13,7 @@ public class App {
     
     public static void main(String[] args) {
         // crear objeto sobre vista
-        InterfazPrincipal vista = new InterfazPrincipal();
+        InterfazPrincipal_1 vista = new InterfazPrincipal_1();
         
         // llamar al metodo para iniciar program
         vista.setVisible(true);

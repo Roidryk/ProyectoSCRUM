@@ -4,12 +4,19 @@
  */
 package Vistas;
 
+import Vistas.Vistas.InterfazPrincipal_1;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Administrador
  */
 public class interfazFiltrarTrabajador extends javax.swing.JFrame {
 
+    public InterfazPrincipal_1 interfazPrincipal;
     /**
      * Creates new form interfazFiltrarTrabajador
      */
@@ -257,14 +264,86 @@ public class interfazFiltrarTrabajador extends javax.swing.JFrame {
 
     private void btnFiltrarAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarAceptarActionPerformed
         // TODO add your handling code here:
-     
-        
+    
+        String dni;
+        String nombre;
+        String apellidos;
+        String sueldo;
+        String dia;
+        String mes;
+        String ano;
+        String matricula;
+        String fecha;
+        String sql = "SELECT * FROM trabajadores WHERE";
+
+        dni = txtFiltrarDNI.getText();
+        nombre = txtFiltrarNombre.getText();
+        apellidos = txtFiltrarApellidos.getText();
+        sueldo = txtFiltrarSueldo.getText();
+        dia = txtFiltrarDia.getText();
+        mes = txtFiltrarMes.getText();
+        ano = txtFiltrarAño.getText();
+        fecha = ano + "-" + mes + "-" + dia;
+        matricula = txtFiltrarMatricula.getText();
+
+
+        if (!dni.isEmpty()) {
+            sql += " dni='" + dni + "' AND";
+        }
+
+        if (!nombre.isEmpty()) {
+            if (nombre.length() == 1) {
+                // Si hay un solo carácter en el nombre, cambia la condición para buscar nombres
+                // que contengan esa letra
+                sql += " nombre LIKE '%" + nombre + "%' AND";
+            } else {
+                // Si hay más de un carácter, usa la condición original
+                sql += " nombre='" + nombre + "' AND";
+                }
+        }
+
+        if (!apellidos.isEmpty()) {
+            sql += " apellidos='" + apellidos + "' AND";
+        }
+
+        if (!sueldo.isEmpty()) {
+            sql += " sueldo" + comboSueldo + "'" + sueldo + "' AND";
+        }
+
+        if (!dia.isEmpty() && !mes.isEmpty() && !ano.isEmpty()) {
+            fecha = ano + "-" + mes + "-" + dia;
+            sql += " fecha" + comboFecha + "'" + fecha + "' AND";
+        }
+
+        if (!matricula.isEmpty()) {
+            sql += " matricula='" + matricula + "' AND";
+        }
+
+        // Eliminar el último "AND" si hay al menos una condición
+        if (sql.endsWith(" AND")) {
+            sql = sql.substring(0, sql.length() - 4);
+        }
+
+        // Agregar el punto y coma al final de la consulta
+        sql += ";";
+
+        System.out.println(sql);
+
+        try {
+            InterfazPrincipal_1 principal = new InterfazPrincipal_1();
+            principal.actualizarTablaConConsulta(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();  // O manejar de alguna otra manera
+            JOptionPane.showMessageDialog(this, "Error al ejecutar la consulta SQL.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        dispose();
     
        
     }//GEN-LAST:event_btnFiltrarAceptarActionPerformed
 
     private void btnFiltrarCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarCancelarActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnFiltrarCancelarActionPerformed
 
     private void txtFiltrarDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFiltrarDNIActionPerformed

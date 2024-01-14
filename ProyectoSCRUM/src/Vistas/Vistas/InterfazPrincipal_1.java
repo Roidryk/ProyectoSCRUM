@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -325,6 +326,29 @@ public class InterfazPrincipal_1 extends javax.swing.JFrame {
         modificar.setVisible(true);*/
     }//GEN-LAST:event_btnModificarActionPerformed
     }
+    
+    public void actualizarTablaConConsulta(String consulta) throws SQLException {
+            try {
+            
+       
+		DAOTrabajador daoTrabajador = new DAOTrabajador();
+
+		// Obtén los trabajadores según la consulta SQL
+		List<Trabajador> trabajadoresFiltrados = daoTrabajador.filtrarTrabajadoresConConsulta(consulta);
+
+		// Actualiza la tabla con los resultados
+		DefaultTableModel model = (DefaultTableModel) tablaTrabajadores.getModel();
+		model.setRowCount(0);
+
+		for (Trabajador trabajador : trabajadoresFiltrados) {
+			Object[] row = { trabajador.getDNI(), trabajador.getNombre(), trabajador.getApellidos(),
+					trabajador.getSueldo(), trabajador.getFechaDia() + "/" + trabajador.getFechaMes() + "/" + trabajador.getFechaAno(), trabajador.getMatricula() };
+			model.addRow(row);
+		} 
+            } catch (SQLException e) {
+            }
+	}
+    
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         // TODO add your handling code here:
         interfazFiltrarTrabajador filtrar = new interfazFiltrarTrabajador();

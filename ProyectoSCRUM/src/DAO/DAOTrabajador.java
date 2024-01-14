@@ -6,9 +6,10 @@ package DAO;
 
 import java.sql.*;
 import java.util.ArrayList;
-
+import java.util.List;
 import Conexion.ConexionBD;
 import Entidades.Trabajador;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -88,37 +89,99 @@ public class DAOTrabajador {
 		}
 	}
 
-    public Trabajador get(String dni) {
-		//Preparo una variable para guardar el objeto que busco
-		Trabajador t = null;
-		//pedir la conexi�n
-		 Connection conexion = new ConexionBD().getConexion();
+    public ArrayList<Trabajador> filtrarTrabajadoresConConsulta(String consulta) throws SQLException {
+        ArrayList<Trabajador> trabajadores = new ArrayList<>();
 
-		try {
-			//Lanzar un SELECT
-			String sql = "SELECT * FROM trabajadores WHERE dni=?";
-			//Uso una plataforma "Preparada"
-			PreparedStatement plataforma = conexion.prepareStatement(sql);
-			plataforma.setString(1, dni); //rellenamos el dni en la ?
-			ResultSet resultado = plataforma.executeQuery();
-                        
-                        String [] fecha = resultado.getString("fecha").split("/");
+        Connection c = new ConexionBD().getConexion();
+        PreparedStatement statement = c.prepareStatement(consulta);
+        ResultSet resultSet = statement.executeQuery();
+        try {
+
+            
+
+            while (resultSet.next()) {
+                String dni = resultSet.getString("dni");
+                String nombre = resultSet.getString("nombre");
+                String apellidos = resultSet.getString("apellidos");
+                Double sueldo = Double.parseDouble(resultSet.getString("sueldo"));
                 
-                        Integer fDia = Integer.parseInt(fecha [0]);
-                        Integer fMes = Integer.parseInt(fecha [1]);
-                        Integer fAno = Integer.parseInt(fecha [2]);
+                String [] fecha = resultSet.getString("fecha").split("/");
+                
+                Integer fDia = Integer.parseInt(fecha [0]);
+                Integer fMes = Integer.parseInt(fecha [1]);
+                Integer fAno = Integer.parseInt(fecha [2]);
+                
+                String matricula = resultSet.getString("matricula");
+                
+                //Se crea un objeto trabajador con las variables
+                Trabajador t = new Trabajador(dni, nombre, apellidos, sueldo, fDia, fMes, fAno, matricula);
 
-			if(resultado.next()) { //si ha venido una tupla, la trabajamos
-				//tratamiento de la tupla
-				t = new Trabajador(resultado.getString("dni"), resultado.getString("nombre"), resultado.getString("apellidos"),  resultado.getDouble("Sueldo"),fDia, fMes, fAno, resultado.getString("Matricula"));
-			}
-			conexion.close();
-		} catch (SQLException e) {
-			System.out.println("Error obteniendo trabajador");
-			e.printStackTrace();
-		}
-		return t;
-	}
+                trabajadores.add(t);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (c != null) {
+                try {
+                    c.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return trabajadores;
+    }
+    
+    public List<Trabajador> obtenerTrabajadoresFiltrados(DefaultTableModel model) {
+        List<Trabajador> trabajadoresFiltrados = new ArrayList<>();
+
+        // Recorrer las filas de la tabla y obtener los trabajadores filtrados
+        for (int i = 0; i < model.getRowCount(); i++) {
+            Trabajador trabajador = new Trabajador();
+
+            // Asumiendo que el constructor de Trabajador acepta los valores necesarios
+            trabajador.setDNI((String) model.getValueAt(i, 0));
+            trabajador.setNombre((String) model.getValueAt(i, 1));
+            trabajador.setApellidos((String) model.getValueAt(i, 2));
+            trabajador.setSueldo((double) model.getValueAt(i, 3));
+            
+            // Obtener la cadena de fecha desde el modelo de la tabla
+            String fechaString = (String) model.getValueAt(i, 4);
+
+            // Dividir la cadena de fecha en día, mes y año
+            String[] fecha = fechaString.split("/");
+
+            // Convertir los componentes de la fecha a enteros
+            Integer fDia = Integer.parseInt(fecha[0]);
+            Integer fMes = Integer.parseInt(fecha[1]);
+            Integer fAno = Integer.parseInt(fecha[2]);
+
+            // Establecer la fecha en el objeto trabajador
+            trabajador.fechaDia(fDia);
+            trabajador.fechaMes(fMes);
+            trabajador.fechaAno(fAno);
+            
+            trabajador.setMatricula((String) model.getValueAt(i, 5));
+
+            trabajadoresFiltrados.add(trabajador);
+        }
+
+        return trabajadoresFiltrados;
+    }
     
     public ArrayList<Trabajador> get () {
         ArrayList<Trabajador> listaT = new ArrayList<Trabajador>(); //Se crea una ArrayList para guardar los trabajadores de la Sentencia
@@ -159,4 +222,4 @@ public class DAOTrabajador {
         
         return listaT; //Se devuelve la ArrayList con todos los trabajadores que se han obtenido de la consulta
     }
-   }
+}

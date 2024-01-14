@@ -116,4 +116,16 @@ public class Trabajador {
     public String toString() {
         return "Trabajador{" + "DNI=" + DNI + ", nombre=" + nombre + ", apellidos=" + apellidos + ", sueldo=" + sueldo + ", fechaDia=" + fechaDia + ", fechaMes=" + fechaMes + ", fechaAno=" + fechaAno + ", matricula=" + matricula + '}';
     }
+
+    public void fechaDia(Integer fDia) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void fechaMes(Integer fMes) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void fechaAno(Integer fAno) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
